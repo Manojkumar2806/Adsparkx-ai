@@ -1,0 +1,60 @@
+Adsparkx AI Platform Billing Policies, Data Residency, and Service SLAs
+
+This document governs billing structures, payment terms, subscription conditions, data privacy compliance, and service level agreements.
+
+=========================================
+SECTION 1: BILLING CYCLE & SYSTEM CHARGES
+=========================================
+1.1 Recurring Billing Cycles
+All subscription tiers (Growth, Developer, Enterprise) are billed in advance. Payment occurs on a recurring monthly cycle starting from the day of subscription. Annual packages are billed upfront with a 15% discount and renew automatically on the anniversary date.
+
+1.2 Plan Upgrades & Downgrades
+* Upgrade: Mid-cycle upgrades are prorated. Unused credit from your current tier is deducted from the new tier price, and a new monthly cycle starts immediately.
+* Downgrade: Downgrades take effect at the end of the current billing cycle. No partial refunds are issued for mid-month downgrades.
+
+1.3 Accepted Payments
+Major credit cards (Visa, MasterCard, American Express) are processed securely via Stripe. Enterprise customers can be invoiced on Net-30 terms subject to credit approval.
+
+=========================================
+SECTION 2: INVOICES & TAX DOCUMENTATION
+=========================================
+2.1 Downloading Invoices
+Automated invoices are emailed monthly. You can manually retrieve historic invoices by logging into console.adsparkx.ai, navigating to User Profile -> Billing Settings, and downloading PDFs under "Invoicing History".
+
+2.2 Invoice Forwarding Automation
+You can configure a primary billing contact under Billing Settings -> Contact Emails. If configured, invoice duplicates are forwarded to that address (e.g. billing@company.com) automatically.
+
+=========================================
+SECTION 3: REFUND & CANCELLATION POLICY
+=========================================
+3.1 The 14-Day Refund Guarantee
+Growth subscriptions are eligible for a full refund if requested within 14 calendar days of the initial registration. 
+
+3.2 Disqualification Criteria
+Refunds are rejected if:
+* API usage exceeds 2,000 credit tokens during the initial 14-day window.
+* The account has been suspended due to terms of service violations (e.g. key sharing, scraping).
+Once a refund is approved, Stripe processes the credit to your card within 5 to 10 business days.
+
+=========================================
+SECTION 4: GDPR COMPLIANCE & DATA RESIDENCY
+=========================================
+4.1 Data Residency Options
+European customer data is processed and stored on cloud servers located in Frankfurt, Germany (EU-West). US customer datasets are hosted in Northern Virginia (US-East). Enterprise accounts can request database migrations by emailing migration-support@adsparkx.ai.
+
+4.2 Encryption Standards
+All customer files and transaction logs are encrypted in transit using TLS 1.3 and at rest on persistent volumes using AES-256 standards.
+
+4.3 GDPR Right to Erasure (Account Deletion)
+Upon permanent account deletion requests, active developer API keys are instantly revoked. All customer records are permanently purged from database backups after a 30-day grace period, except billing archives which are kept for 7 years to comply with financial audits.
+
+=========================================
+SECTION 5: SERVICE LEVEL AGREEMENT (SLA)
+=========================================
+5.1 Uptime Commitments
+We guarantee 99.9% uptime for Growth accounts and 99.99% uptime for Enterprise accounts. Uptime calculations exclude Sunday maintenance windows (02:00 to 04:00 UTC).
+
+5.2 Support Response Times
+* Growth: Response within 24 hours.
+* Enterprise: Response within 1 hour for Critical outages, and 4 hours for standard tickets.
+If uptime drops below the SLA, users can claim invoice credits (10% to 50% depending on downtime) by emailing claims@adsparkx.ai.
