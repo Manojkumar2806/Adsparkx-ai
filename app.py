@@ -117,12 +117,48 @@ if "escalated" not in st.session_state:
 if "current_telemetry" not in st.session_state:
     st.session_state.current_telemetry = None
 
+# Handle API Key dynamically for Cloud Deployment
+api_key = Config.GEMINI_API_KEY
+
+# Check if user entered key in Streamlit Session State
+if "user_gemini_key" in st.session_state and st.session_state.user_gemini_key:
+    api_key = st.session_state.user_gemini_key
+
+# Always show API Authentication section in the sidebar
+st.sidebar.markdown("### 🔑 API Authentication")
+
+if api_key:
+    # Key is loaded (either from .env or UI input)
+    masked_key = api_key[:6] + "..." + api_key[-4:] if len(api_key) > 10 else "••••••••"
+    st.sidebar.success(f"Active Key: `{masked_key}`")
+    
+    # Allow user to update/override the key in the UI if desired
+    new_key = st.sidebar.text_input("Update Gemini API Key", type="password", value=api_key, key="gemini_key_input_widget")
+    if new_key != api_key:
+        st.session_state.user_gemini_key = new_key
+        st.rerun()
+else:
+    # Key is missing - Display mandatory field warning
+    st.sidebar.error("🔴 Gemini API Key is Required *")
+    key_input = st.sidebar.text_input("Enter Gemini API Key *", type="password", placeholder="AIzaSy...", key="gemini_key_input_widget")
+    if key_input:
+        st.session_state.user_gemini_key = key_input
+        st.rerun()
+        
+    st.info("⚠️ **Authentication Required**: Please enter a valid Google Gemini API Key in the sidebar to unlock the support agent chat interface.")
+    st.stop()
+
+# Set Config API key to active key
+Config.GEMINI_API_KEY = api_key
+
 # Initialize classes inside a cached function to avoid re-initializing on every render
 @st.cache_resource
-def get_services():
+def get_services(gemini_api_key: str):
     try:
-        # Validate configuration first
+        # Set config key (ensures it is set inside the cached environment)
+        Config.GEMINI_API_KEY = gemini_api_key
         Config.validate()
+        
         classifier = PersonaClassifier()
         pipeline = RAGPipeline(force_local=False)
         # Automatic doc ingestion check
@@ -134,7 +170,7 @@ def get_services():
         logger.exception("Error initializing support agent systems")
         return None, None, None, None, str(e)
 
-classifier, pipeline, escalator, generator, init_error = get_services()
+classifier, pipeline, escalator, generator, init_error = get_services(api_key)
 
 # ----------------- APP HEADER -----------------
 col_title, col_status = st.columns([8, 2])

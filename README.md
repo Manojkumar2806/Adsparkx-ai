@@ -4,6 +4,18 @@ An intelligent, production-ready customer support agent that adapts its response
 
 ---
 
+## 📖 Interactive System Documentation Website
+We have created a dedicated documentation website containing the system architecture, 7-Level lifecycle breakdown, system dataflow, and an **Interactive Sandbox Simulator**.
+
+*   **Quick Access**: Simply open [**docs/index.html**](file:///C:/Adsparkx%20AI%20Assignment/docs/index.html) directly in any modern web browser.
+*   **Local Web Hosting**: Or run a simple python server to access it:
+    `ash
+    python -m http.server 8000
+    `
+    Then visit http://localhost:8000/docs/ in your browser!
+
+---
+
 ## 🏗️ System Architecture
 
 ```mermaid
